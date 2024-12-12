@@ -15,13 +15,13 @@ module.exports = {
 
     await queryInterface.bulkInsert('Airplanes',[
       {
-        modelNumber: "airbus120",
+        modelNumber: "airbus 120",
         capacity: 120,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        modelNumber: "airbus320",
+        modelNumber: "airbus 320",
         capacity: 320,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -38,9 +38,7 @@ module.exports = {
      */
 
     await queryInterface.bulkDelete('Airplanes', {
-      where: {
-        [Op.or] : [{modelNumber: "airbus120"},{modelNumber: "airbus320"}]
-      }
+        [Op.or] : [{modelNumber: 'airbus120'},{modelNumber: 'airbus320'}]
     });
   }
 };
