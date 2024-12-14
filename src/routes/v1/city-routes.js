@@ -25,6 +25,7 @@ router.delete('/:id',
 
 //  /api/v1/cities/:id  PATCH
 router.patch('/:id',
+    CityMiddleWares.validateUpdateRequest,
     CityController.updateCity);
 
 module.exports = router;

@@ -115,9 +115,9 @@ req-body : {name: 'Kolkata'}
 
 async function updateCity(req,res) {
     try {
-        const city = await CityService.updateCity({
-            name: req.body.name
-        },req.params.id);
+        const updates = req.body;
+
+        const city = await CityService.updateCity(updates,req.params.id);
 
         SuccessResponse.data = city;
         SuccessResponse.message = "Successfully updated the city";

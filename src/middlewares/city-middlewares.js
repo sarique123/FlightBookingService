@@ -14,6 +14,21 @@ async function validateCreateRequest(req,res,next){
     next();
 }
 
+async function validateUpdateRequest(req,res,next){
+    const updates = req.body;
+
+    if(Object.keys(updates).length === 0){
+        ErrorResponse.message = 'Something went wrong while updating the city';
+        ErrorResponse.error = new AppError(['No field is provided for update'],StatusCodes.BAD_REQUEST);
+
+        return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json(ErrorResponse);
+    }
+    next();
+}
+
 module.exports = {
-    validateCreateRequest
+    validateCreateRequest,
+    validateUpdateRequest
 }

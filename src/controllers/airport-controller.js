@@ -1,21 +1,23 @@
 const {StatusCodes} = require('http-status-codes');
-const { AirplaneService } = require('../services');
+const { AirportService } = require('../services');
 const { SuccessResponse,ErrorResponse } = require('../utils/common');
 
 /*
-POST : /airplanes
-req-body : {modelNumber: 'airbus320',capacity:'300'}
+POST : /airports
+req-body : {name: 'Chaudhari Charan Singh International Airport', code: 'CCSA', address: 'Ahmamau', cityId : 5}
 */
 
-async function createAirplane(req,res) {
+async function createAirport(req,res) {
     try {
-        const airplane = await AirplaneService.createAirplane({
-            modelNumber: req.body.modelNumber,
-            capacity: req.body.capacity
+        const airport = await AirportService.createAirport({
+            name: req.body.name,
+            code: req.body.code,
+            address: req.body.address,
+            cityId: req.body.cityId
         });
 
-        SuccessResponse.data = airplane;
-        SuccessResponse.message = "Successfully created an airplane";
+        SuccessResponse.data = airport;
+        SuccessResponse.message = "Successfully created an airport";
 
         return res
         .status(StatusCodes.CREATED)
@@ -32,16 +34,16 @@ async function createAirplane(req,res) {
 
 
 /*
-GET : /airplanes
+GET : /airports
 req-body : {}
 */
 
-async function getAirplanes(req,res) {
+async function getAirports(req,res) {
     try {
-        const airplanes = await AirplaneService.getAirplanes();
+        const airports = await AirportService.getAirports();
 
-        SuccessResponse.data = airplanes;
-        SuccessResponse.message = "Successfully fetch all the airplanes";
+        SuccessResponse.data = airports;
+        SuccessResponse.message = "Successfully fetch all the airports";
 
         return res
         .status(StatusCodes.OK)
@@ -58,16 +60,16 @@ async function getAirplanes(req,res) {
 
 
 /*
-GET : /airplanes/:id
+GET : /airports/:id
 req-body : {}
 */
 
-async function getAirplane(req,res) {
+async function getAirport(req,res) {
     try {
-        const airplane = await AirplaneService.getAirplane(req.params.id);
+        const airport = await AirportService.getAirport(req.params.id);
 
-        SuccessResponse.data = airplane;
-        SuccessResponse.message = "Successfully fetch the airplane";
+        SuccessResponse.data = airport;
+        SuccessResponse.message = "Successfully fetch the airport";
 
         return res
         .status(StatusCodes.OK)
@@ -83,16 +85,16 @@ async function getAirplane(req,res) {
 
 
 /*
-DELETE : /airplanes/:id
+DELETE : /airports/:id
 req-body : {}
 */
 
-async function deleteAirplane(req,res) {
+async function deleteAirport(req,res) {
     try {
-        const airplane = await AirplaneService.deleteAirplane(req.params.id);
+        const airport = await AirportService.deleteAirport(req.params.id);
 
-        SuccessResponse.data = airplane;
-        SuccessResponse.message = "Successfully deleted the data of the airplane";
+        SuccessResponse.data = airport;
+        SuccessResponse.message = "Successfully deleted the data of the airport";
 
         return res
         .status(StatusCodes.OK)
@@ -108,17 +110,17 @@ async function deleteAirplane(req,res) {
 
 
 /*
-PATCH : /airplanes/:id
+PATCH : /airports/:id
 req-body : {}
 */
 
-async function updateAirplane(req,res) {
+async function updateAirport(req,res) {
     try {
         const updates = req.body;
-        const airplane = await AirplaneService.updateAirplane(updates,req.params.id);
+        const airport = await AirportService.updateAirport(updates,req.params.id);
 
-        SuccessResponse.data = airplane;
-        SuccessResponse.message = "Successfully updated the data of the airplane";
+        SuccessResponse.data = airport;
+        SuccessResponse.message = "Successfully updated the data of the airport";
 
         return res
         .status(StatusCodes.OK)
@@ -133,9 +135,9 @@ async function updateAirplane(req,res) {
 }
 
 module.exports = {
-    createAirplane,
-    getAirplanes,
-    getAirplane,
-    deleteAirplane,
-    updateAirplane
+    createAirport,
+    getAirports,
+    getAirport,
+    deleteAirport,
+    updateAirport
 }
