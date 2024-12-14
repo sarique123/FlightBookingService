@@ -1,0 +1,53 @@
+const {StatusCodes} = require('http-status-codes');
+const { FlightService } = require('../services');
+const { SuccessResponse,ErrorResponse } = require('../utils/common');
+
+/*
+POST : /cities
+req-body : {
+        flightNumber = 'UK 808',
+        airplaneId: 1,
+        departureAirportId: 'LKO',
+        arrivalAirportId: 'BLR',
+        departueTime: 2024-12-15 07:30:00,
+        arrivalTime: 2024-12-15 09:15:00,
+        price: 5000,
+        totalSeats: 320,
+        boardingGate: '12A'
+}
+*/
+
+async function createFlight(req,res) {
+    try {
+        const flight = await FlightService.createFlight({
+            flightNumber: req.body.flightNumber,
+            airplaneId: req.body.airplaneId,
+            departureAirportId: req.body.departureAirportId,
+            arrivalAirportId: req.body.arrivalAirportId,
+            departueTime: req.body.departueTime,
+            arrivalTime: req.body.arrivalTime,
+            price: req.body.price,
+            totalSeats: req.body.totalSeats,
+            boardingGate: req.body.boardingGate
+        });
+
+        SuccessResponse.data = flight;
+        SuccessResponse.message = "Successfully created a flight";
+
+        return res
+        .status(StatusCodes.CREATED)
+        .json(SuccessResponse);
+    } catch (error) {
+        console.log('Inside controller error ' + error);
+
+        ErrorResponse.error = error;
+        return res
+        .status(error.statusCode)
+        .json(ErrorResponse);
+    } 
+}
+
+
+module.exports = {
+    createFlight
+}
