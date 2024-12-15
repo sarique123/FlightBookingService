@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    departueTime: {
+    departureTime: {
       type: DataTypes.DATE,
       allowNull: false
     },
@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    totalSeats: {
+    totalSeats: {    //  empty seats available 
       type: DataTypes.INTEGER,
       allowNull: false
     },

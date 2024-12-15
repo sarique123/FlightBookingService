@@ -40,9 +40,9 @@ function validateCreateRequest(req,res,next){
         .json(ErrorResponse);
     } 
 
-    if(!req.body.departueTime){
+    if(!req.body.departureTime){
         ErrorResponse.message = "Something went wrong while creating a flight";
-        ErrorResponse.error = new AppError(["Flight's departueTime not found in the incoming request in the correct manner"],StatusCodes.BAD_REQUEST);
+        ErrorResponse.error = new AppError(["Flight's departureTime not found in the incoming request in the correct manner"],StatusCodes.BAD_REQUEST);
         
         return res
         .status(StatusCodes.BAD_REQUEST)
@@ -76,7 +76,7 @@ function validateCreateRequest(req,res,next){
         .json(ErrorResponse);
     }
 
-    if(!compareTime(req.body.departueTime,req.body.arrivalTime)){
+    if(!compareTime(req.body.departureTime,req.body.arrivalTime)){
         ErrorResponse.message = "Something went wrong while creating a flight";
         ErrorResponse.error = new AppError(["Arrival time is not before the departure time"],StatusCodes.BAD_REQUEST);
         

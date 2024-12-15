@@ -43,7 +43,7 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
-      departueTime: {
+      departureTime: {
         type: Sequelize.DATE,
         allowNull: false
       },

@@ -11,6 +11,8 @@ router.post('/',
     FlightMiddleWares.validateCreateRequest,
     FlightController.createFlight);
 
-
+//  /api/v1/flights?trips=  GET
+router.get('/',
+    FlightController.getAllFlights);
 
 module.exports = router;

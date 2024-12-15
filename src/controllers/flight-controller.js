@@ -9,7 +9,7 @@ req-body : {
         airplaneId: 1,
         departureAirportId: 'LKO',
         arrivalAirportId: 'BLR',
-        departueTime: 2024-12-15 07:30:00,
+        departureTime: 2024-12-15 07:30:00,
         arrivalTime: 2024-12-15 09:15:00,
         price: 5000,
         totalSeats: 320,
@@ -24,7 +24,7 @@ async function createFlight(req,res) {
             airplaneId: req.body.airplaneId,
             departureAirportId: req.body.departureAirportId,
             arrivalAirportId: req.body.arrivalAirportId,
-            departueTime: req.body.departueTime,
+            departureTime: req.body.departureTime,
             arrivalTime: req.body.arrivalTime,
             price: req.body.price,
             totalSeats: req.body.totalSeats,
@@ -48,6 +48,30 @@ async function createFlight(req,res) {
 }
 
 
+/**
+ * GET: /flights 
+ *
+ */
+
+async function getAllFlights(req,res) {
+    try {
+        const flights = await FlightService.getAllFlights(req.query);
+        SuccessResponse.data = flights;
+        return res
+        .status(StatusCodes.CREATED)
+        .json(SuccessResponse);
+    } catch (error) {
+        console.log('Inside controller error ' + error);
+
+        ErrorResponse.error = error;
+        return res
+        .status(error.statusCode)
+        .json(ErrorResponse);
+    }
+}
+
+
 module.exports = {
-    createFlight
+    createFlight,
+    getAllFlights
 }
