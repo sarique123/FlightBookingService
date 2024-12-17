@@ -2,7 +2,7 @@ const {StatusCodes} = require('http-status-codes');
 const {ErrorResponse} = require('../utils/common');
 const AppError = require('../utils/errors/app-error');
 
-async function validateCreateRequest(req,res,next){
+function validateCreateRequest(req,res,next){
     if(!req.body.name){
         ErrorResponse.message = "Something went wrong while creating a city";
         ErrorResponse.error = new AppError(["City name not found in the incoming request in the correct manner"],StatusCodes.BAD_REQUEST);
@@ -14,7 +14,7 @@ async function validateCreateRequest(req,res,next){
     next();
 }
 
-async function validateUpdateRequest(req,res,next){
+function validateUpdateRequest(req,res,next){
     const updates = req.body;
 
     if(Object.keys(updates).length === 0){
