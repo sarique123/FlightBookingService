@@ -3,7 +3,7 @@
 
 const {Enums} = require('../utils/common');
 
-const {ECONOMY,PREMIUM_ECONOOMY,BUSINESS,FIRST_CLASS} = Enums.SEAT_TYPE;
+const {ECONOMY,PREMIUM_ECONOMY,BUSINESS,FIRST_CLASS} = Enums.SEAT_TYPE;
 
 
 module.exports = {
@@ -35,7 +35,7 @@ module.exports = {
       },
       seatType: {
         type: Sequelize.ENUM,
-        values: [ECONOMY,PREMIUM_ECONOOMY,FIRST_CLASS,BUSINESS],
+        values: [ECONOMY,PREMIUM_ECONOMY,FIRST_CLASS,BUSINESS],
         defaultValue: ECONOMY,
         allowNull: false
       },

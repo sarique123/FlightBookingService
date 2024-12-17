@@ -70,8 +70,64 @@ async function getAllFlights(req,res) {
     }
 }
 
+/**
+ * GET: /flights/:id 
+ *
+ */
+
+async function getFlight(req,res) {
+    try {
+        const flight = await FlightService.getFlight(req.params.id);
+        SuccessResponse.data = flight;
+        return res
+        .status(StatusCodes.CREATED)
+        .json(SuccessResponse);
+    } catch (error) {
+        console.log('Inside controller error ' + error);
+
+        ErrorResponse.error = error;
+        return res
+        .status(error.statusCode)
+        .json(ErrorResponse);
+    }
+}
+
+
+/**
+ * GET: /flights/:id 
+ * req-body = {
+ *    req.body.seats,
+ *    req.body.dec
+ * }
+ */
+
+async function updateSeats(req,res) {
+    try {
+        
+        const flight = await FlightService.updateSeats({
+            flightId: req.params.flightId,
+            seats: req.body.seats,
+            dec: req.body.dec
+        });
+        
+        SuccessResponse.data = flight;
+        return res
+        .status(StatusCodes.CREATED)
+        .json(SuccessResponse);
+    } catch (error) {
+        console.log('Inside controller error ' + error);
+
+        ErrorResponse.error = error;
+        return res
+        .status(error.statusCode)
+        .json(ErrorResponse);
+    }
+}
+
 
 module.exports = {
     createFlight,
-    getAllFlights
+    getAllFlights,
+    getFlight,
+    updateSeats
 }

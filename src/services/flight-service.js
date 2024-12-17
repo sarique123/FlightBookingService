@@ -38,7 +38,7 @@ async function getAllFlights(query) {
 
         // check if departure Airport and arrival Airport are not same
         if(departureAirportId === arrivalAirportId){
-            throw new AppError('Departure Airport and Arrival Airport can not be null', StatusCodes.BAD_REQUEST);
+            throw new AppError('Departure Airport and Arrival Airport can not be same', StatusCodes.BAD_REQUEST);
         }
     }
 
@@ -75,8 +75,36 @@ async function getAllFlights(query) {
     }
 }
 
+
+async function getFlight(id){
+    try {
+        const flight = await flightRepository.get(id);
+        return flight;
+    } catch (error) {
+        console.log("IN " + error);
+        
+        if(error.statusCode === StatusCodes.NOT_FOUND){
+            throw new AppError('The flight you requested is not found',error.statusCode);
+        }
+        throw new AppError('Cannot fetch the data of the flight',StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+
+async function updateSeats(data) {
+    
+    try {
+        const response = await flightRepository.updateRemainingSeats(data.flightId,data.seats,data.dec);
+        return response;
+    } catch (error) {
+        throw new AppError('Cannot update the data of the flight',StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
     createFlight,
-    getAllFlights
+    getAllFlights,
+    getFlight,
+    updateSeats
 }
 
